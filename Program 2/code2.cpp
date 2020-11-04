@@ -32,7 +32,7 @@ void circlebres()
 			y--;
 			d = d + 4 * (x - y) + 10;
 		}
-		draw_circle(xc, yc, x, y);
+	//	draw_circle(xc, yc, x, y);
 	}
 	glFlush();
 }

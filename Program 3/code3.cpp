@@ -4,10 +4,12 @@
 int m;
 typedef float point[3];
 point tetra[4] = { {0,100,-100},{0,0,100},{100,-100,-100},{-100,-100,-100} };
+
 void tetrahedron(void);
 void myinit(void);
 void divide_triangle(point a, point b, point c, int m);
 void draw_triangle(point p1, point p2, point p3);
+
 int main(int argv, char** argc)
 {
     //int m;

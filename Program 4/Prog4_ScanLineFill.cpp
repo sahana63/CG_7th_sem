@@ -2,6 +2,7 @@
 #include<glut/glut.h>
 #include<algorithm>
 #include<iostream>
+#include<unistd.h>
 
 using namespace std;
 float x[100], y[100]; //= { 0,0,20,100,100 }, y[] = { 0,100,50,100,0 };
@@ -11,7 +12,7 @@ int wx = 150, wy = 150;
 static float intx[10] = { 0 };
 
 void draw_line(float x1, float y1, float x2, float y2) {
-	//sleep(100);
+	glutPostRedisplay();
 	glColor3f(0, 0, 1);
 	glBegin(GL_LINES);
 	glVertex2f(x1, y1);
@@ -52,10 +53,12 @@ void display_filled_polygon() {
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLineWidth(4);
+	glColor3f(1, 0, 0);
 	glBegin(GL_LINE_LOOP);
 	for (int i = 0; i < n; i++)
 		glVertex2f(x[i], y[i]);
 	glEnd();
+	glColor3f(0, 0, 1);
 	scanfill(x, y);
 	//glFlush();
 }
@@ -63,7 +66,6 @@ void display_filled_polygon() {
 void myInit() {
 
 	glClearColor(1, 1, 1, 1);
-	glColor3f(0, 0, 1);
 	glPointSize(1);
 	gluOrtho2D(0, wx, 0, wy);
 
@@ -79,7 +81,7 @@ int main(int ac, char* av[]) {
 		scanf("%f %f", &x[i], &y[i]);
 	}
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(wx, wy);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Scanline fill algorithm");
 	glutDisplayFunc(display_filled_polygon);

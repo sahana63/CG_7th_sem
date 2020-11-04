@@ -7,6 +7,7 @@ void display(int x, int y)
 		glVertex2i(x, y);
 	glEnd();
 }
+
 int x1, y1, x2, y2;
 
 void draw_line()
@@ -39,6 +40,7 @@ void draw_line()
 	x = x1;
 	y = y1;
 
+
 	if (dx>dy)
 	{
 
@@ -67,8 +69,8 @@ void draw_line()
 	{
 
 		display(x, y);
-		e = 2 * dy - dx;
-		inc1 = 2 * (dy - dx);
+		e = 2 * dx - dy;
+		inc1 = 2 * (dx - dy);
 		inc2 = 2 * dx;
 		for (i = 0; i<dy; i++)
 		{
