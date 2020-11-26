@@ -39,6 +39,7 @@ void result(){
 
 void display()
 {
+	initialize();
 	glTranslatef(100, 100, 0);
 	glRotatef(angle, 0, 0, 1);
 	glTranslatef(-100, -100, 0);
@@ -46,10 +47,12 @@ void display()
 }
 void display2()
 {
-
+	initialize();
+	
 	float x1 = 0, x2 = 500;
 	float y1 = m * x1 + c;
 	float y2 = m * x2 + c;
+	
 	glColor3f(1, 1, 0);
 	glBegin(GL_LINES);
 	glVertex2f(x1, y1);
@@ -79,11 +82,9 @@ void myInit() {
 }
 void mouse(int btn, int state, int x, int y) {
 	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		initialize();
 		display();
 	}
 	else if (btn == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) {
-		initialize();
 		display2();
 	}
 }
