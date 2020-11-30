@@ -1,10 +1,11 @@
 #include<glut/glut.h>
 #include<stdio.h>
 #include<math.h>
+
 int xc, yc, r;
 int rx, ry, xce, yce;
-void draw_circle(int xc, int yc, int x, int y)
-{
+
+void draw_circle(int xc, int yc, int x, int y){
 	glBegin(GL_POINTS);
 	glVertex2i(xc + x, yc + y);
 	glVertex2i(xc - x, yc + y);
@@ -16,28 +17,28 @@ void draw_circle(int xc, int yc, int x, int y)
 	glVertex2i(xc - y, yc - x);
 	glEnd();
 }
-void circlebres()
-{
+
+void circlebres(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	int x = 0, y = r;
 	int d = 3 - 2 * r;
-	while (x <= y)
-	{
+	while (x <= y){
 		draw_circle(xc, yc, x, y);
-		x++;
 		if (d < 0)
 			d = d + 4 * x + 6;
-		else
-		{
-			y--;
+		else{
 			d = d + 4 * (x - y) + 10;
+			y--;
 		}
-	//	draw_circle(xc, yc, x, y);
+		x++;
 	}
 	glFlush();
 }
+
+/*
 int p1_x, p2_x, p1_y, p2_y;
 int point1_done = 0;
+
 void myMouseFunccircle(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && point1_done == 0)
@@ -58,11 +59,9 @@ void myMouseFunccircle(int button, int state, int x, int y)
 		point1_done = 0;
 	}
 }
+*/
 
-
-/////ELLIPSE/////////////
-void draw_ellipse(int xce, int yce, int x, int y)
-{
+void draw_ellipse(int xce, int yce, int x, int y){
 	glBegin(GL_POINTS);
 	glVertex2i(x + xce, y + yce);
 	glVertex2i(-x + xce, y + yce);
@@ -70,38 +69,26 @@ void draw_ellipse(int xce, int yce, int x, int y)
 	glVertex2i(-x + xce, -y + yce);
 	glEnd();
 }
-void midptellipse()
-{
+
+void midptellipse(){
 	glClear(GL_COLOR_BUFFER_BIT);
-	float dx, dy, d1, d2, x, y;
-	x = 0;
-	y = ry;
+	float dx, dy, d1, d2, x=0, y=ry;
 
 	// Initial decision parameter of region 1 
-	d1 = (ry * ry) - (rx * rx * ry) +
-		(0.25 * rx * rx);
+	d1 = (ry * ry) - (rx * rx * ry) + (0.25 * rx * rx);
 	dx = 2 * ry * ry * x;
 	dy = 2 * rx * rx * y;
 
 	// For region 1 
-	while (dx < dy)
-	{
-
+	while (dx < dy){
 		// Print points based on 4-way symmetry 
 		draw_ellipse(xce, yce, x, y);
-
-
-
-		// Checking and updating value of 
-		// decision parameter based on algorithm 
-		if (d1 < 0)
-		{
+		// Checking and updating value of decision parameter based on algorithm 
+		if (d1 < 0){
 			x++;
 			dx = dx + (2 * ry * ry);
 			d1 = d1 + dx + (ry * ry);
-		}
-		else
-		{
+		}else{
 			x++;
 			y--;
 			dx = dx + (2 * ry * ry);
@@ -116,22 +103,16 @@ void midptellipse()
 		(rx * rx * ry * ry);
 
 	// Plotting points of region 2 
-	while (y >= 0)
-	{
-
+	while (y >= 0){
 		// Print points based on 4-way symmetry 
 		draw_ellipse(xce, yce, x, y);
 
-		// Checking and updating parameter 
-		// value based on algorithm 
-		if (d2 > 0)
-		{
+		// Checking and updating parameter value based on algorithm 
+		if (d2 > 0){
 			y--;
 			dy = dy - (2 * rx * rx);
 			d2 = d2 + (rx * rx) - dy;
-		}
-		else
-		{
+		}else{
 			y--;
 			x++;
 			dx = dx + (2 * ry * ry);
@@ -141,7 +122,8 @@ void midptellipse()
 	}
 	glFlush();
 }
-int p1e_x, p2e_x, p1e_y, p2e_y, p3e_x, p3e_y;
+
+/*int p1e_x, p2e_x, p1e_y, p2e_y, p3e_x, p3e_y;
 int point1e_done = 0;
 void myMouseFunc(int button, int state, int x, int y)
 {
@@ -172,16 +154,19 @@ void myMouseFunc(int button, int state, int x, int y)
 		point1e_done = 0;
 	}
 }
+
 void myDrawing()
 { }
 void myDrawingc()
-{ }
+{ }*/
 
 void minit()
 {
 	glClearColor(1, 1, 1, 1);
 	glColor3f(1.0, 0.0, 0.0);
 	glPointSize(3.0);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 	gluOrtho2D(-250, 250, -250, 250);
 }
 
@@ -212,18 +197,18 @@ int main(int argc, char* argv[])
 	int ch;
 	scanf("%d",&ch);
 	switch(ch){
-	case 1: 
-	printf("Enter coordinates of centre of circle and radius\n");
-	scanf("%d%d%d",&xc,&yc,&r);
-	glutCreateWindow("Circle");
-	glutDisplayFunc(circlebres);
-	break;
-	case 2: 
-	printf("Enter coordinates of centre of ellipse and major and minor radius\n");
-	scanf("%d%d%d%d",&xce,&yce,&rx,&ry);
-	glutCreateWindow("Ellipse");
-	glutDisplayFunc(midptellipse);
-	break;
+		case 1: 
+			printf("Enter coordinates of centre of circle and radius\n");
+			scanf("%d%d%d",&xc,&yc,&r);
+			glutCreateWindow("Circle");
+			glutDisplayFunc(circlebres);
+			break;
+		case 2: 
+			printf("Enter coordinates of centre of ellipse and major and minor radius\n");
+			scanf("%d%d%d%d",&xce,&yce,&rx,&ry);
+			glutCreateWindow("Ellipse");
+			glutDisplayFunc(midptellipse);
+			break;
 	}
 	//END KEYBOARD 
 	minit();
