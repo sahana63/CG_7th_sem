@@ -49,7 +49,7 @@ void cohensuther(double x0, double y0, double x1, double y1){
 		// if both the endpoints are outside
 		else if (outcode0 & outcode1)
 			done = true;
-		// line intersects the clipping window at atleast once
+		// line intersects the clipping window atleast once
 		else{
 			double x, y;
 			outcodeout = outcode0 ? outcode0 : outcode1;
@@ -84,7 +84,7 @@ void cohensuther(double x0, double y0, double x1, double y1){
 
 	}while (!done);
 
-	// displayed the clipped vertices which are inside the clipping window
+	// display the clipped vertices which are inside the clipping window
 	if (accept){
 		double sx = (xvmax - xvmin) / (xmax - xmin);
 		double sy = (yvmax - yvmin) / (ymax - ymin);
@@ -112,12 +112,12 @@ void display(){
 		glVertex2f(xmin, ymax);
 	glEnd();
 
+	glBegin(GL_LINES);
 	for (int i = 0; i < n; i++){
-		glBegin(GL_LINES);
-		glVertex2d(ls[i].x1, ls[i].y1);
-		glVertex2d(ls[i].x2, ls[i].y2);
-		glEnd();
+			glVertex2d(ls[i].x1, ls[i].y1);
+			glVertex2d(ls[i].x2, ls[i].y2);
 	}
+	glEnd();
 
 	glColor3f(1, 0, 0);
 	glBegin(GL_LINE_LOOP);
@@ -132,7 +132,7 @@ void display(){
 	glFlush();
 }
 
-void myinit(){
+void myInit(){
 	glClearColor(1, 1, 1, 1);
 	glColor3f(1, 0, 0);
 	glPointSize(1.0);
@@ -159,7 +159,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(300, 300);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Cohen line clipping");
-	myinit();
+	myInit();
 	glutDisplayFunc(display);
 	glutMainLoop();
 }
