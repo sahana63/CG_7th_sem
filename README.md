@@ -2,8 +2,12 @@
 
 ## Course: Computer Graphics (16CS73)
 
-Name: Sahana Srinivasan
+_Name:_ Sahana Srinivasan
 
-USN: 1RV17CS132
+_USN:_ 1RV17CS132
 
-Batch: C2 Batch
+_Batch:_ C2 Batch
+
+## List of programs
+
+![List of programs](list_of_programs.png)
