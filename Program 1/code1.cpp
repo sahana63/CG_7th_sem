@@ -3,12 +3,14 @@
 
 int x1, y1, x2, y2;
 
+// displays a point
 void display(int x, int y){
 	glBegin(GL_POINTS);
 		glVertex2i(x, y);
 	glEnd();
 }
 
+// implements bresenham's line drawing algorithm
 void draw_line(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	int dx, dy, i, p;
@@ -27,10 +29,10 @@ void draw_line(){
 		incy = -1;
 	}
 
-
+	// slope is less than 1
 	if (dx>dy){
-		p = 2 * dy - dx;
-		inc1 = 2 * (dy - dx);
+		p = 2 * dy - dx;			// initial decision parameter
+		inc1 = 2 * (dy - dx);		
 		inc2 = 2 * dy;
 		for (i = 0; i<dx; i++){
 			display(x, y);
@@ -42,8 +44,10 @@ void draw_line(){
 			x += incx;
 
 		}
-	} else{
-		p = 2 * dx - dy;
+	} 
+	// slope is greater than 1
+	else{
+		p = 2 * dx - dy;			// initial decision parameter
 		inc1 = 2 * (dx - dy);
 		inc2 = 2 * dx;
 		for (i = 0; i<dy; i++){
@@ -59,7 +63,7 @@ void draw_line(){
 	glFlush();
 }
 
-void minit(){
+void myInit(){
 	glClearColor(1, 1, 1, 1);
 	glColor3f(0.0, 0.0, 1.0);
 	glPointSize(2.0);
@@ -77,8 +81,7 @@ int main(int argc, char *argv[]){
 	glutInitWindowSize(300, 300);
 	glutInitWindowPosition(5, 5);
 	glutCreateWindow("Bresenham's Algorithm");
-	glutDisplayFunc(draw_line);
-	minit();
+	glutDisplayFunc(draw_line); 
+	myInit();
 	glutMainLoop();
 }
-

@@ -5,22 +5,26 @@
 int xc, yc, r;
 int rx, ry, xce, yce;
 
+// plots the points of a circle according to 8-fold symmetry
 void draw_circle(int xc, int yc, int x, int y){
 	glBegin(GL_POINTS);
-	glVertex2i(xc + x, yc + y);
-	glVertex2i(xc - x, yc + y);
-	glVertex2i(xc + x, yc - y);
-	glVertex2i(xc - x, yc - y);
-	glVertex2i(xc + y, yc + x);
-	glVertex2i(xc - y, yc + x);
-	glVertex2i(xc + y, yc - x);
-	glVertex2i(xc - y, yc - x);
+		glVertex2i(xc + x, yc + y);
+		glVertex2i(xc - x, yc + y);
+		glVertex2i(xc + x, yc - y);
+		glVertex2i(xc - x, yc - y);
+		glVertex2i(xc + y, yc + x);
+		glVertex2i(xc - y, yc + x);
+		glVertex2i(xc + y, yc - x);
+		glVertex2i(xc - y, yc - x);
 	glEnd();
 }
 
-void circlebres(){
+// implements Bresenham's circle drawing algorithm
+void circle_bres(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	int x = 0, y = r;
+
+	//initial decision parameter
 	int d = 3 - 2 * r;
 	while (x <= y){
 		draw_circle(xc, yc, x, y);
@@ -61,16 +65,18 @@ void myMouseFunccircle(int button, int state, int x, int y)
 }
 */
 
+// plots the points of a ellipse according to 4-fold symmetry
 void draw_ellipse(int xce, int yce, int x, int y){
 	glBegin(GL_POINTS);
-	glVertex2i(x + xce, y + yce);
-	glVertex2i(-x + xce, y + yce);
-	glVertex2i(x + xce, -y + yce);
-	glVertex2i(-x + xce, -y + yce);
+		glVertex2i(x + xce, y + yce);
+		glVertex2i(-x + xce, y + yce);
+		glVertex2i(x + xce, -y + yce);
+		glVertex2i(-x + xce, -y + yce);
 	glEnd();
 }
 
-void midptellipse(){
+// implements mid point ellipse drawing algorithm
+void mid_point_ellipse(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	float dx, dy, d1, d2, x=0, y=ry;
 
@@ -81,9 +87,7 @@ void midptellipse(){
 
 	// For region 1 
 	while (dx < dy){
-		// Print points based on 4-way symmetry 
 		draw_ellipse(xce, yce, x, y);
-		// Checking and updating value of decision parameter based on algorithm 
 		if (d1 < 0){
 			x++;
 			dx = dx + (2 * ry * ry);
@@ -102,12 +106,9 @@ void midptellipse(){
 		((rx * rx) * ((y - 1) * (y - 1))) -
 		(rx * rx * ry * ry);
 
-	// Plotting points of region 2 
+	// region 2
 	while (y >= 0){
-		// Print points based on 4-way symmetry 
 		draw_ellipse(xce, yce, x, y);
-
-		// Checking and updating parameter value based on algorithm 
 		if (d2 > 0){
 			y--;
 			dy = dy - (2 * rx * rx);
@@ -160,8 +161,7 @@ void myDrawing()
 void myDrawingc()
 { }*/
 
-void minit()
-{
+void minit(){
 	glClearColor(1, 1, 1, 1);
 	glColor3f(1.0, 0.0, 0.0);
 	glPointSize(3.0);
@@ -170,8 +170,7 @@ void minit()
 	gluOrtho2D(-250, 250, -250, 250);
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]){
 	
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
@@ -201,13 +200,13 @@ int main(int argc, char* argv[])
 			printf("Enter coordinates of centre of circle and radius\n");
 			scanf("%d%d%d",&xc,&yc,&r);
 			glutCreateWindow("Circle");
-			glutDisplayFunc(circlebres);
+			glutDisplayFunc(circle_bres);
 			break;
 		case 2: 
-			printf("Enter coordinates of centre of ellipse and major and minor radius\n");
+			printf("Enter coordinates of centre of standard ellipse and major and minor radius\n");
 			scanf("%d%d%d%d",&xce,&yce,&rx,&ry);
 			glutCreateWindow("Ellipse");
-			glutDisplayFunc(midptellipse);
+			glutDisplayFunc(mid_point_ellipse);
 			break;
 	}
 	//END KEYBOARD 
