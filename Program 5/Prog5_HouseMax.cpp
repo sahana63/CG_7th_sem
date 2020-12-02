@@ -2,12 +2,12 @@
 #include<math.h>
 #include<stdio.h>
 
-// house coordinates
+// House coordinates
 float house[11][2] = { { 100,200 },{ 200,250 },{ 300,200 },{ 100,200 },{ 100,100 },{ 175,100 },{ 175,150 },{ 225,150 },{ 225,100 },{ 300,100 },{ 300,200 } };
 int angle;
 float m, c, theta;
 
-// Display the iniitial house
+// Display the initial house
 void initialize(){
 	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -45,7 +45,7 @@ void rotate(){
 	result();
 }
 
-// Reflect the house about y=mx+c
+// Reflect about y=mx+c
 void reflect(){
 	initialize();
 	
