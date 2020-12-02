@@ -152,7 +152,7 @@ void myinit()
 	glPointSize(1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0, 300, 0, 300);
+	gluOrtho2D(0, 500, 0, 500);
 }
 
 int main(int argc, char** argv)
