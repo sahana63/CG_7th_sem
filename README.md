@@ -1,4 +1,4 @@
-# CG_7th_sem
+# CG 7th Sem Lab
 
 ## Course: Computer Graphics (16CS73)
 
