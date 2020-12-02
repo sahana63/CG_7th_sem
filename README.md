@@ -6,7 +6,7 @@ _Name:_ Sahana Srinivasan
 
 _USN:_ 1RV17CS132
 
-_Batch:_ C2 Batch
+_Batch:_ C2
 
 ## List of programs
 
