@@ -1,4 +1,4 @@
-# CG_C2_batch_7th_sem
+# CG_7th_sem
 Name: Sahana Srinivasan
 
 USN: 1RV17CS132
