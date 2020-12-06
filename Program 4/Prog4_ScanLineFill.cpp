@@ -9,13 +9,13 @@ static float intx[10] = {0}; // x intercepts of polygon with scanline
 
 
 void draw_line(float x1, float y1, float x2, float y2) {
-	glutPostRedisplay();
 	glColor3f(0, 0, 1);
 	glBegin(GL_LINES);
 		glVertex2f(x1, y1);
 		glVertex2f(x2, y2);
 	glEnd();
 	glFlush();
+	glutPostRedisplay();
 }
 
 // finds the intersection of scanline with each edge of a polygon
@@ -79,5 +79,4 @@ int main(int argc, char* argv[]) {
 	glutDisplayFunc(display_filled_polygon);
 	myInit();
 	glutMainLoop();
-
 }

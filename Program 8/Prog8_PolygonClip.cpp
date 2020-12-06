@@ -101,6 +101,10 @@ void display(){
 int main(int argc, char* argv[]){
 	printf("Enter no. of vertices: \n");
 	scanf("%d", &poly_size);
+	if (poly_size==2) {
+		printf("Cannot draw Polygon with 2 vertices\n");
+		exit(0);
+	}
 	org_poly_size = poly_size;
 	for (int i = 0; i < poly_size; i++){
 		printf("Polygon Vertex:\n");

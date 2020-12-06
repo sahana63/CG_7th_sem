@@ -81,7 +81,6 @@ void cohensuther(double x0, double y0, double x1, double y1){
 				outcode1 = computeoutcode(x1, y1);
 			}
 		}
-
 	}while (!done);
 
 	// display the clipped vertices which are inside the clipping window

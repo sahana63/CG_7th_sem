@@ -1,0 +1,25 @@
+Last login: Thu Dec  3 22:27:47 on ttys000
+You have new mail.
+-bash: export: `2019.07': not a valid identifier
+-bash: export: `Fusion.app/Contents/Public:/opt/X11/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/mongodb/bin#:/Users/sahanas/bin': not a valid identifier
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+SAHANAs-MacBook-Air-1154:~ sahanas$ cd Desktop/7th\ sem/CG/LAB/CG_7th_sem/
+SAHANAs-MacBook-Air-1154:CG_7th_sem sahanas$ ls
+'Program 1'   'Program 12'  'Program 4'  'Program 7'   README.md
+'Program 10'  'Program 2'   'Program 5'  'Program 8'  'Sample codes'
+'Program 11'  'Program 3'   'Program 6'  'Program 9'   list_of_programs.png
+SAHANAs-MacBook-Air-1154:CG_7th_sem sahanas$ cd Program\ 4
+SAHANAs-MacBook-Air-1154:Program 4 sahanas$ ./code4 
+Enter no. of sides: 6
+Enter coordinates of endpoints: 
+X-coord Y-coord: 0 100
+X-coord Y-coord: 100 0
+X-coord Y-coord: 200 100
+X-coord Y-coord: 150 200
+X-coord Y-coord: 100 100
+X-coord Y-coord: 50 200
+Terminated: 15
+SAHANAs-MacBook-Air-1154:Program 4 sahanas$ 

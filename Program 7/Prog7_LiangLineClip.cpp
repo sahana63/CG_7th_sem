@@ -18,7 +18,7 @@ int cliptest(double p, double q, double* u1, double* u2){
 	if (p < 0.0){    
 		if (r > *u1) *u1 = r;
 		if (r > *u2) return(false); // line portion is outside
-	}else if (p > 0.0){    
+	}else if (p > 0.0){  
 			if (r < *u2)* u2 = r;
 			if (r < *u1) return(false); // line portion is outside
 	}else
@@ -49,7 +49,7 @@ void LiangBarsky(double x0, double y0, double x1, double y1){
 					double vx0 = xvmin + (x0 - xmin) * sx;
 					double vy0 = yvmin + (y0 - ymin) * sy;
 					double vx1 = xvmin + (x1 - xmin) * sx;
-					double vy1 = yvmin + (y1 - ymin) * sy;
+					double vy1 = yvmin + (y1 - ymin) * sy; 
 
 					glColor3f(0.0, 0.0, 1.0); 
 					glBegin(GL_LINES);
