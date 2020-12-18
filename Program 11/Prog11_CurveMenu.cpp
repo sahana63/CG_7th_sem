@@ -63,14 +63,14 @@ void drawCurve(int curveNum) {
 
 void colorMenu(int id) {
 	switch (id) {
-		case 0: break;
+		case 7: break;
 		case 1: red = 0;green = 0;blue = 1;break;
 		case 2: red = 0;green = 1;blue = 0;break;
 		case 3:	red = 0;green = 1;blue = 1;break;
 		case 4: red = 1;green = 0;blue = 0;break;
 		case 5: red = 1;green = 0;blue = 1;break;
 		case 6: red = 1;green = 1;blue = 0;break;
-		case 7: red = 1;green = 1;blue = 1;break;
+		case 0: red = 0;green = 0;blue = 0;break;
 		default:break;
 	}
 	drawCurve(curve);

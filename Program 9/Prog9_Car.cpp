@@ -42,11 +42,6 @@ void myInit() {
 	glOrtho(0, 600, 0, 600, 0, 600);
 }
 
-void draw_wheel() {
-	glColor3f(0, 1, 1);
-	glutSolidSphere(10, 25, 25);
-}
-
 void moveCar(float s) {
 	glTranslatef(s, 0.0, 0.0);
 	glCallList(CAR);
@@ -67,6 +62,7 @@ void myDisp() {
 	wheellist();
 
 }
+
 void mouse(int btn, int state, int x, int y) {
 	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
 		s += 5;
