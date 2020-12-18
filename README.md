@@ -11,3 +11,12 @@ _Batch:_ C2
 ## List of programs
 
 ![List of programs](list_of_programs.png)
+
+## Part B
+
+### _Topic:_ Tetris Game using OpenGL
+
+_Other team member:_  Ruchita R. Biradar (1RV17CS126)
+
+_Submitted on:_ 18th December 2020
+
