@@ -1,4 +1,4 @@
-#include<glut/glut.h>
+#include<gl/glut.h>
 #include<math.h>
 #include<stdio.h>
 #include<stdlib.h>
@@ -84,6 +84,17 @@ void main_menu(int id) {
 }
 void mydisplay() {}
 
+void mykeyboard(unsigned char key, int x, int y) {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	switch (key) {
+	case 'z': 	gluOrtho2D(0.0, (double)150, 0.0, (double)100); break;
+	case 'o': 	gluOrtho2D(0.0, (double)300, 0.0, (double)250); break;
+	default: break;
+	}
+	drawCurve(curve);
+}
+
 void myreshape(int nw, int nh) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -121,8 +132,10 @@ int main(int argc, char** argv) {
 	glutAddSubMenu("colors", colorId);
 	glutAddMenuEntry("quit", 3);
 	glutAttachMenu(GLUT_LEFT_BUTTON);
+	
 	myinit();
 	glutDisplayFunc(mydisplay);
+	glutKeyboardFunc(mykeyboard);
 	glutReshapeFunc(myreshape);
 	glutMainLoop();
 }
