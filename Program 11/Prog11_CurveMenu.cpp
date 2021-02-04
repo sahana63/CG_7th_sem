@@ -1,7 +1,7 @@
+#include<stdlib.h>
 #include<gl/glut.h>
 #include<math.h>
 #include<stdio.h>
-#include<stdlib.h>
 
 struct screenPt {
 	int x, y;
