@@ -1,4 +1,4 @@
-#include<GLUT/glut.h>
+#include<GL/glut.h>
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -29,7 +29,7 @@ void wheellist() {
 
 void mykeyboard(unsigned char key, int x, int y) {
 	switch (key) {
-	case 't': glutPostRedisplay(); break;
+	case 't': s+=1;glutPostRedisplay(); break;
 	case 'q': exit(0);
 	default: break;
 	}
