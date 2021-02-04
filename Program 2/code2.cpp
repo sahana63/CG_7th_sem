@@ -184,11 +184,17 @@ void myDrawing()
 void myDrawingc()
 { }*/
 
-void myreshape(int nw, int nh) {
+void myReshape(int w, int h){
+	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0.0, (double)nw, 0.0, (double)nh);
-	glClear(GL_COLOR_BUFFER_BIT);
+	if (w <= h)
+		gluOrtho2D(-250.0, 250.0, -250.0 * (GLfloat)h / (GLfloat)w,
+			250.0 * (GLfloat)h / (GLfloat)w);
+	else
+		gluOrtho2D(-250.0 * (GLfloat)w / (GLfloat)h,
+			250.0 * (GLfloat)w / (GLfloat)h, -250.0, 250.0);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 void minit(){
@@ -240,7 +246,7 @@ int main(int argc, char* argv[]){
 			break;
 	}
 	//END KEYBOARD 
+	glutReshapeFunc(myReshape);
 	minit();
-	glutReshapeFunc(myreshape);
 	glutMainLoop();
 	}
