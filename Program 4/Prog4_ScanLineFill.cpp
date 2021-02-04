@@ -1,11 +1,12 @@
-#include<glut/glut.h>
+#include<gl/glut.h>
 #include<stdio.h>
 #include<algorithm>
+#include<math.h>
 
 int n, m;
 int wx = 500, wy = 500;
-float x[100], y[100];
-static float intx[10] = {0}; // x intercepts of polygon with scanline
+float x[120], y[120];
+static float intx[100] = {0}; // x intercepts of polygon with scanline
 
 
 void draw_line(float x1, float y1, float x2, float y2) {
@@ -42,17 +43,6 @@ void scanfill(float x[], float y[]) {
 	}
 }
 
-void display_filled_polygon() {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glLineWidth(2);
-	glColor3f(1, 0, 0);
-	// draw the boundary of the polygon
-	glBegin(GL_LINE_LOOP);
-		for (int i = 0; i < n; i++)	glVertex2f(x[i], y[i]);
-	glEnd();
-	glColor3f(0, 0, 1);
-	scanfill(x, y);
-}
 
 void myInit() {
 	glClearColor(1, 1, 1, 1);
@@ -60,16 +50,27 @@ void myInit() {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(0, wx, 0, wy);
+}
 
+void display_filled_polygon() {
+	glClear(GL_COLOR_BUFFER_BIT);
+	glLineWidth(2);
+	glColor3f(1, 0, 0);
+	//draw the boundary of the polygon
+	glBegin(GL_LINE_LOOP);
+		for (int i = 0; i < n; i++)	glVertex2f(x[i], y[i]);
+	glEnd();
+	glColor3f(0, 0, 1);
+	scanfill(x, y);
 }
 
 int main(int argc, char* argv[]) {
-	printf("Enter no. of sides: ");
-	scanf("%d", &n);
-	printf("Enter coordinates of endpoints: \n");
+	printf_s("Enter no. of sides: ");
+	scanf_s("%d", &n);
+	printf_s("Enter coordinates of endpoints: \n");
 	for (int i = 0; i < n; i++){
-		printf("X-coord Y-coord: ");
-		scanf("%f %f", &x[i], &y[i]);
+		printf_s("X-coord Y-coord: ");
+		scanf_s("%f %f", &x[i], &y[i]);
 	}
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
