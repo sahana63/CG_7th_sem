@@ -106,7 +106,7 @@ int main(int argc, char* argv[]){
 	printf_s("Enter no. of vertices: \n");
 	scanf_s("%d", &poly_size);
 	if (poly_size<=2) {
-		printf("Cannot draw Polygon with %d vertices\n",poly_size);
+		printf_s("Cannot draw Polygon with %d vertices\n",poly_size);
 		exit(0);
 	}
 	org_poly_size = poly_size;
@@ -120,7 +120,7 @@ int main(int argc, char* argv[]){
 	scanf_s("%d", &clipper_size);
 	for (int i = 0; i < clipper_size; i++){
 		printf_s("Clip Vertex:\n");
-		scanf_S("%d%d", &clipper_points[i][0], &clipper_points[i][1]);
+		scanf_s("%d%d", &clipper_points[i][0], &clipper_points[i][1]);
 	}
 
 	glutInit(&argc, argv);
