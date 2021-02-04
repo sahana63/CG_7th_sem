@@ -1,4 +1,4 @@
-#include<glut/glut.h>
+#include<gl/glut.h>
 #include<stdio.h>
 
 int m;
@@ -51,8 +51,8 @@ void myInit(){
 }
 
 int main(int argc, char** argv){
-    printf("Enter the number of iterations: ");
-    scanf("%d", &m);
+    printf_s("Enter the number of iterations: ");
+    scanf_s("%d", &m);
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH); // depth buffer is used
     glutInitWindowPosition(100, 200);
