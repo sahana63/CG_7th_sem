@@ -1,7 +1,9 @@
+#include<stdlib.h>
 #include<gl/glut.h>
 #include<stdio.h>
 #include<algorithm>
 #include<math.h>
+#include<Windows.h>
 
 int n, m;
 int wx = 500, wy = 500;
@@ -16,7 +18,7 @@ void draw_line(float x1, float y1, float x2, float y2) {
 		glVertex2f(x2, y2);
 	glEnd();
 	glFlush();
-	glutPostRedisplay();
+	Sleep(100);
 }
 
 // finds the intersection of scanline with each edge of a polygon
