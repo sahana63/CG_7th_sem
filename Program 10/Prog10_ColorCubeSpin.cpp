@@ -1,141 +1,95 @@
-#include<gl/glut.h>
-#include<math.h>
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
+#include <GL/glut.h>
+#include <time.h>
 
-struct screenPt {
-	int x, y;
-};
+GLfloat vertices[] = { -1.0,-1.0,-1.0,1.0,-1.0,-1.0,
+1.0,1.0,-1.0, -1.0,1.0,-1.0, -1.0,-1.0,1.0,
+1.0,-1.0,1.0, 1.0,1.0,1.0, -1.0,1.0,1.0 };
 
-typedef enum { limacon = 1, cardioid = 2, threeLeaf = 3, spiral = 4 } curveName;
-int w = 600, h = 500;
-int curve = 1;
-int red = 0, green = 0, blue = 0;
+GLfloat normals[] = { -1.0,-1.0,-1.0,1.0,-1.0,-1.0,
+1.0,1.0,-1.0, -1.0,1.0,-1.0, -1.0,-1.0,1.0,
+1.0,-1.0,1.0, 1.0,1.0,1.0, -1.0,1.0,1.0 };
 
-void myinit(void) {
-	glClearColor(1.0, 1.0, 1.0, 1.0);
-	glMatrixMode(GL_PROJECTION);
-	gluOrtho2D(0.0, 200.0, 0.0, 150.0);
+GLfloat colors[] = { 0.0,0.0,0.0,1.0,0.0,0.0,
+1.0,1.0,0.0, 0.0,1.0,0.0, 0.0,0.0,1.0,
+1.0,0.0,1.0, 1.0,1.0,1.0, 0.0,1.0,1.0 };
+
+GLubyte cubeIndices[] = { 0,3,2,1,2,3,7,6,0,4,7,3,1,2,6,5,4,5,6,7,0,1,5,4 };
+
+static GLfloat theta[] = { 0.0,0.0,0.0 };
+static GLfloat beta[] = { 0.0,0.0,0.0 };
+static GLint axis = 2;
+
+void delay(float secs){
+	float end = clock() / CLOCKS_PER_SEC + secs;
+	while ((clock() / CLOCKS_PER_SEC) < end);
 }
 
-void lineSegment(screenPt p1, screenPt p2) {
-	glLineWidth(3.0);
+
+void display(void){
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glLoadIdentity();
+	glTranslatef(beta[0],beta[1],beta[2]);
+	glRotatef(theta[0], 1.0, 0.0, 0.0);
+	glRotatef(theta[1], 0.0, 1.0, 0.0);
+	glRotatef(theta[2], 0.0, 0.0, 1.0);
+
+	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices); // 6*4
+
 	glBegin(GL_LINES);
-		glVertex2i(p1.x, p1.y);
-		glVertex2i(p2.x, p2.y);
+		glVertex3f(0.0, 0.0, 0.0);
+		glVertex3f(1.0, 1.0, 1.0);
 	glEnd();
 	glFlush();
 }
-void drawCurve(int curveNum) {
-	const double twoPi = 6.283185;
-	const int a = 175, b = 60;
-	float r, theta, dtheta = 1.0 / float(a);
-	int x0 = 200, y0 = 250;
-	screenPt curvePt[2];
-	glColor3f(red, green, blue);
-	curvePt[0].x = x0;
-	curvePt[0].y = y0;
-	glClear(GL_COLOR_BUFFER_BIT);
-	switch (curveNum) {
-		case limacon: curvePt[0].x += a + b; break;
-		case cardioid: curvePt[0].x += a + a; break;
-		case threeLeaf: curvePt[0].x += a; break;
-		case spiral: break;
-		default: break;
-	}
-	theta = dtheta;
-	while (theta < twoPi) {
-		switch (curveNum) {
-			case limacon: r = a * cos(theta) + b; break;
-			case cardioid: r = a * (1 + cos(theta)); break;
-			case threeLeaf: r = a * cos(3 * theta); break;
-			case spiral: r = (a / 4.0) * theta; break;
-			default: break;
-		}
-		curvePt[1].x = x0 + r * cos(theta);
-		curvePt[1].y = y0 + r * sin(theta);
-		lineSegment(curvePt[0], curvePt[1]);
-		curvePt[0].x = curvePt[1].x;
-		curvePt[0].y = curvePt[1].y;
-		theta += dtheta;
-	}
+
+// Idle callback, spin cube 2 degrees about selected axis
+void spinCube(){
+	delay(0.01);
+	theta[axis] += 2.0;
+	if (theta[axis] > 360.0) theta[axis] -= 360.0;
+	//beta[axis]+=1;
+	//if (beta[axis] > 5) beta[axis]-=10;
+	glutPostRedisplay();
 }
 
-void colorMenu(int id) {
-	switch (id) {
-		case 7: break;
-		case 1: red = 0;green = 0;blue = 1;break;
-		case 2: red = 0;green = 1;blue = 0;break;
-		case 3:	red = 0;green = 1;blue = 1;break;
-		case 4: red = 1;green = 0;blue = 0;break;
-		case 5: red = 1;green = 0;blue = 1;break;
-		case 6: red = 1;green = 1;blue = 0;break;
-		case 0: red = 0;green = 0;blue = 0;break;
-		default:break;
-	}
-	drawCurve(curve);
+
+void mouse(int btn, int state, int x, int y){
+	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN) axis = 0;
+	if (btn == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN) axis = 1;
+	if (btn == GLUT_RIGHT_BUTTON && state == GLUT_DOWN) axis = 2;
 }
 
-void main_menu(int id) {
-	switch (id) {
-		case 3: exit(0);
-		default: break;
-	}
-}
-void mydisplay() {}
-
-void mykeyboard(unsigned char key, int x, int y) {
+void myReshape(int w, int h){
+	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	switch (key) {
-	case 'z': 	gluOrtho2D(0.0, (double)150, 0.0, (double)100); break;
-	case 'o': 	gluOrtho2D(0.0, (double)300, 0.0, (double)250); break;
-	default: break;
-	}
-	drawCurve(curve);
+	if (w <= h)
+		glOrtho(-5.0, 5.0, -5.0 * (GLfloat)h / (GLfloat)w,
+			5.0 * (GLfloat)h / (GLfloat)w, -10.0, 10.0);
+	else
+		glOrtho(-5.0 * (GLfloat)w / (GLfloat)h,
+			5.0 * (GLfloat)w / (GLfloat)h, -5.0, 5.0, -10.0, 10.0);
+	glMatrixMode(GL_MODELVIEW);
 }
 
-void myreshape(int nw, int nh) {
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0.0, (double)nw, 0.0, (double)nh);
-	glClear(GL_COLOR_BUFFER_BIT);
-}
-
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(w, h);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Drawing curves");
-
-	int curveId = glutCreateMenu(drawCurve);
-	glutAddMenuEntry("Limacon", 1);
-	glutAddMenuEntry("Cardioid", 2);
-	glutAddMenuEntry("Threeleaf", 3);
-	glutAddMenuEntry("Spiral", 4);
-	glutAttachMenu(GLUT_LEFT_BUTTON);
-
-	int colorId = glutCreateMenu(colorMenu);
-	glutAddMenuEntry("Red", 4);
-	glutAddMenuEntry("Green", 2);
-	glutAddMenuEntry("Blue", 1);
-	glutAddMenuEntry("Black", 0);
-	glutAddMenuEntry("Yellow", 6);
-	glutAddMenuEntry("Cyan", 3);
-	glutAddMenuEntry("Magenta", 5);
-	glutAddMenuEntry("white", 7);
-	glutAttachMenu(GLUT_LEFT_BUTTON);
-
-	glutCreateMenu(main_menu);
-	glutAddSubMenu("drawCurve", curveId);
-	glutAddSubMenu("colors", colorId);
-	glutAddMenuEntry("quit", 3);
-	glutAttachMenu(GLUT_LEFT_BUTTON);
-	
-	myinit();
-	glutDisplayFunc(mydisplay);
-	glutKeyboardFunc(mykeyboard);
-	glutReshapeFunc(myreshape);
+	glutInitWindowSize(500, 500);
+	glutCreateWindow("colorcube");
+	glutReshapeFunc(myReshape);
+	glutDisplayFunc(display);
+	glutIdleFunc(spinCube);
+	glutMouseFunc(mouse);
+	glEnable(GL_DEPTH_TEST); /* Enable hidden--surface--removal */
+	glEnableClientState(GL_COLOR_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, vertices);
+	glColorPointer(3, GL_FLOAT, 0, colors);
+	glNormalPointer(GL_FLOAT, 0, normals);
+	glColor3f(1.0, 1.0, 1.0);
 	glutMainLoop();
 }
