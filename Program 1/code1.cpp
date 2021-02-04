@@ -1,4 +1,4 @@
-#include<glut/glut.h>
+#include<gl/glut.h>
 #include<stdio.h>
 
 int x1, y1, x2, y2;
@@ -19,6 +19,28 @@ void draw_line(){
 
 	dx = x2 - x1;
 	dy = y2 - y1;
+
+	if (dx==0){
+		if (dy<0) incy=-1;
+		else incy=1;
+		x=x1;
+		for (i = 0; i<dy; i++){
+			display(x, y);
+			y += incy;
+		}
+		return;
+	}
+
+	if (dy==0){
+		if (dx<0) incx=-1;
+		else incx=1;
+		y=y1;
+		for (i = 0; i<dx; i++){
+			display(x, y);
+			x += incx;
+		}
+		return;
+	}
 
 	if (dx<0){
 		dx = -dx;
@@ -75,7 +97,7 @@ void myInit(){
 
 int main(int argc, char *argv[]){
 	printf("Enter points: x1, y1, x2, y2\n");
-	scanf("%d%d%d%d", &x1, &y1, &x2, &y2);
+	scanf_s("%d%d%d%d", &x1, &y1, &x2, &y2);
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(300, 300);
