@@ -1,6 +1,6 @@
+#include<stdlib.h>
 #include<GL/glut.h>
 #include<stdio.h>
-#include<stdlib.h>
 
 #define CAR 1
 #define WHEEL 2
