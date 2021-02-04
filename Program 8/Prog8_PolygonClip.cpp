@@ -85,8 +85,8 @@ void display(){
 	myInit();
 	glColor3f(1.0f, 0.0f, 0.0f);
 	drawPoly(clipper_points, clipper_size);
-	//glColor3f(0.0f, 1.0f, 0.0f);
-	//drawPoly(org_poly_points, org_poly_size);
+	glColor3f(0.0f, 1.0f, 0.0f);
+	drawPoly(org_poly_points, org_poly_size);
 
 	for (int i = 0; i < clipper_size; i++){
 		int k = (i + 1) % clipper_size;
@@ -97,7 +97,7 @@ void display(){
 	glColor3f(0.0f, 0.0f, 1.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(250,250,0);
+	//glTranslatef(250,250,0);
 	drawPoly(poly_points, poly_size);
 	glFlush();
 }
@@ -106,7 +106,7 @@ int main(int argc, char* argv[]){
 	printf_s("Enter no. of vertices: \n");
 	scanf_s("%d", &poly_size);
 	if (poly_size<=2) {
-		printf_s("Cannot draw Polygon with %d vertices\n",poly_size);
+		printf("Cannot draw Polygon with %d vertices\n",poly_size);
 		exit(0);
 	}
 	org_poly_size = poly_size;
@@ -120,7 +120,7 @@ int main(int argc, char* argv[]){
 	scanf_s("%d", &clipper_size);
 	for (int i = 0; i < clipper_size; i++){
 		printf_s("Clip Vertex:\n");
-		scanf_s("%d%d", &clipper_points[i][0], &clipper_points[i][1]);
+		scanf_S("%d%d", &clipper_points[i][0], &clipper_points[i][1]);
 	}
 
 	glutInit(&argc, argv);
