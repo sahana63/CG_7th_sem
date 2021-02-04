@@ -1,6 +1,6 @@
-#include<glut/glut.h>
-#include<stdio.h>
 #include<stdlib.h>
+#include<gl/glut.h>
+#include<stdio.h>
 
 #define true 1
 #define false 0
@@ -142,15 +142,15 @@ void myInit(){
 
 int main(int argc, char** argv)
 {
-	printf("Enter window coordinates (xmin ymin xmax ymax): \n");
-	scanf("%lf%lf%lf%lf", &xmin, &ymin, &xmax, &ymax);
-	printf("Enter viewport coordinates (xvmin yvmin xvmax yvmax) :\n");
-	scanf("%lf%lf%lf%lf", &xvmin, &yvmin, &xvmax, &yvmax);
-	printf("Enter no. of lines:\n");
-	scanf("%d", &n);
+	printf_s("Enter window coordinates (xmin ymin xmax ymax): \n");
+	scanf_s("%lf%lf%lf%lf", &xmin, &ymin, &xmax, &ymax);
+	printf_s("Enter viewport coordinates (xvmin yvmin xvmax yvmax) :\n");
+	scanf_s("%lf%lf%lf%lf", &xvmin, &yvmin, &xvmax, &yvmax);
+	printf_s("Enter no. of lines:\n");
+	scanf_s("%d", &n);
 	for (int i = 0; i < n; i++){
-		printf("Enter line endpoints (x1 y1 x2 y2):\n");
-		scanf("%d%d%d%d", &ls[i].x1, &ls[i].y1, &ls[i].x2, &ls[i].y2);
+		printf_s("Enter line endpoints (x1 y1 x2 y2):\n");
+		scanf_s("%d%d%d%d", &ls[i].x1, &ls[i].y1, &ls[i].x2, &ls[i].y2);
 	}
 
 	glutInit(&argc, argv);
