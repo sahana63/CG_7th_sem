@@ -1,5 +1,5 @@
 #include<iostream>
-#include<GLUT/glut.h>
+#include<GL/glut.h>
 
 int poly_size, poly_points[20][2], org_poly_size, org_poly_points[20][2], clipper_size, clipper_points[20][2];
 const int MAX_POINTS = 20;
@@ -85,38 +85,42 @@ void display(){
 	myInit();
 	glColor3f(1.0f, 0.0f, 0.0f);
 	drawPoly(clipper_points, clipper_size);
-	glColor3f(0.0f, 1.0f, 0.0f);
-	drawPoly(org_poly_points, org_poly_size);
+	//glColor3f(0.0f, 1.0f, 0.0f);
+	//drawPoly(org_poly_points, org_poly_size);
 
 	for (int i = 0; i < clipper_size; i++){
 		int k = (i + 1) % clipper_size;
 		clip(poly_points, poly_size, clipper_points[i][0],clipper_points[i][1], 
 			clipper_points[k][0],clipper_points[k][1]);
 	}
+	
 	glColor3f(0.0f, 0.0f, 1.0f);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glTranslatef(250,250,0);
 	drawPoly(poly_points, poly_size);
 	glFlush();
 }
 
 int main(int argc, char* argv[]){
-	printf("Enter no. of vertices: \n");
-	scanf("%d", &poly_size);
-	if (poly_size==2) {
-		printf("Cannot draw Polygon with 2 vertices\n");
+	printf_s("Enter no. of vertices: \n");
+	scanf_s("%d", &poly_size);
+	if (poly_size<=2) {
+		printf("Cannot draw Polygon with %d vertices\n",poly_size);
 		exit(0);
 	}
 	org_poly_size = poly_size;
 	for (int i = 0; i < poly_size; i++){
-		printf("Polygon Vertex:\n");
-		scanf("%d%d", &poly_points[i][0], &poly_points[i][1]);
+		printf_s("Polygon Vertex:\n");
+		scanf_s("%d%d", &poly_points[i][0], &poly_points[i][1]);
 		org_poly_points[i][0] = poly_points[i][0];
 		org_poly_points[i][1] = poly_points[i][1];
 	}
-	printf("Enter no. of vertices of clipping window:");
-	scanf("%d", &clipper_size);
+	printf_s("Enter no. of vertices of clipping window:");
+	scanf_s("%d", &clipper_size);
 	for (int i = 0; i < clipper_size; i++){
-		printf("Clip Vertex:\n");
-		scanf("%d%d", &clipper_points[i][0], &clipper_points[i][1]);
+		printf_s("Clip Vertex:\n");
+		scanf_s("%d%d", &clipper_points[i][0], &clipper_points[i][1]);
 	}
 
 	glutInit(&argc, argv);
