@@ -106,7 +106,7 @@ int main(int argc, char* argv[]){
 	printf_s("Enter no. of vertices: \n");
 	scanf_s("%d", &poly_size);
 	if (poly_size<=2) {
-		printf("Cannot draw Polygon with %d vertices\n",poly_size);
+		printf_s("Cannot draw Polygon with %d vertices\n",poly_size);
 		exit(0);
 	}
 	org_poly_size = poly_size;
