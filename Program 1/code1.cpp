@@ -20,28 +20,6 @@ void draw_line(){
 	dx = x2 - x1;
 	dy = y2 - y1;
 
-	if (dx==0){
-		if (dy<0) incy=-1;
-		else incy=1;
-		x=x1;
-		for (i = 0; i<dy; i++){
-			display(x, y);
-			y += incy;
-		}
-		return;
-	}
-
-	if (dy==0){
-		if (dx<0) incx=-1;
-		else incx=1;
-		y=y1;
-		for (i = 0; i<dx; i++){
-			display(x, y);
-			x += incx;
-		}
-		return;
-	}
-
 	if (dx<0){
 		dx = -dx;
 		incx = -1;
