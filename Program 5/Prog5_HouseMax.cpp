@@ -1,4 +1,4 @@
-#include<glut/glut.h>
+#include<gl/glut.h>
 #include<math.h>
 #include<stdio.h>
 
@@ -91,10 +91,10 @@ void myInit() {
 }
 
 int main(int argc, char** argv){
-	printf("Enter the rotation angle\n");
-	scanf("%d", &angle);
-	printf("Enter c and m value for line y=mx+c\n");
-	scanf("%f %f", &c, &m);
+	printf_s("Enter the rotation angle\n");
+	scanf_s("%d", &angle);
+	printf_s("Enter c and m value for line y=mx+c\n");
+	scanf_s("%f %f", &c, &m);
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(900, 900);
