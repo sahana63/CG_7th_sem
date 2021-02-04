@@ -1,6 +1,6 @@
 #include<iostream>
 #include<math.h>
-#include<glut/glut.h>
+#include<gl/glut.h>
 
 using namespace std;
 
@@ -33,7 +33,7 @@ void display() {
 					+ 3 * pow(t, 2) * (1 - t) * yc[2] + pow(t, 3) * yc[3];
 		glVertex2f(xt, yt);
 	}
-	glColor3f(1, 1, 0);
+	glColor3f(1, 0, 0);
 	for (i = 0; i < 4; i++)
 		glVertex2f(x1[i], yc[i]);
 	glEnd();
