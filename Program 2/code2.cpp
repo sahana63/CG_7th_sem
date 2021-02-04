@@ -184,6 +184,13 @@ void myDrawing()
 void myDrawingc()
 { }*/
 
+void myreshape(int nw, int nh) {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0.0, (double)nw, 0.0, (double)nh);
+	glClear(GL_COLOR_BUFFER_BIT);
+}
+
 void minit(){
 	glClearColor(1, 1, 1, 1);
 	glColor3f(1.0, 0.0, 0.0);
@@ -234,5 +241,6 @@ int main(int argc, char* argv[]){
 	}
 	//END KEYBOARD 
 	minit();
+	glutReshapeFunc(myreshape);
 	glutMainLoop();
 	}
