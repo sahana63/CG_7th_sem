@@ -1,5 +1,7 @@
+  
 #include<iostream>
 #include<GL/glut.h>
+#include<Windows.h>
 
 int poly_size, poly_points[20][2], org_poly_size, org_poly_points[20][2], clipper_size, clipper_points[20][2];
 const int MAX_POINTS = 20;
@@ -107,6 +109,7 @@ int main(int argc, char* argv[]){
 	scanf_s("%d", &poly_size);
 	if (poly_size<=2) {
 		printf_s("Cannot draw Polygon with %d vertices\n",poly_size);
+		Sleep(10000);
 		exit(0);
 	}
 	org_poly_size = poly_size;
