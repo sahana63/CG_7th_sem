@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <GLUT/glut.h>
+#include <GL/glut.h>
 
 double xmin, ymin, xmax, ymax; 
 double xvmin, yvmin, xvmax, yvmax;
@@ -99,15 +99,15 @@ void myInit(){
 }
 
 int main(int argc, char** argv){
-	printf("Enter window coordinates: (xmin ymin xmax ymax) \n");
-	scanf("%lf%lf%lf%lf", &xmin, &ymin, &xmax, &ymax);
-	printf("Enter viewport coordinates: (xvmin yvmin xvmax yvmax) \n");
-	scanf("%lf%lf%lf%lf", &xvmin, &yvmin, &xvmax, &yvmax);
-	printf("Enter no. of lines:\n");
-	scanf("%d", &n);
+	printf_s("Enter window coordinates: (xmin ymin xmax ymax) \n");
+	scanf_s("%lf%lf%lf%lf", &xmin, &ymin, &xmax, &ymax);
+	printf_s("Enter viewport coordinates: (xvmin yvmin xvmax yvmax) \n");
+	scanf_s("%lf%lf%lf%lf", &xvmin, &yvmin, &xvmax, &yvmax);
+	printf_s("Enter no. of lines:\n");
+	scanf_s("%d", &n);
 	for (int i = 0; i < n; i++){
-		printf("Enter coordinates: (x1 y1 x2 y2)\n");
-		scanf("%d%d%d%d", &ls[i].x1, &ls[i].y1, &ls[i].x2, &ls[i].y2);
+		printf_s("Enter coordinates: (x1 y1 x2 y2)\n");
+		scanf_s("%d%d%d%d", &ls[i].x1, &ls[i].y1, &ls[i].x2, &ls[i].y2);
 	}
 
 	glutInit(&argc, argv);
